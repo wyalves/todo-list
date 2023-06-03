@@ -1,21 +1,36 @@
 version: "3.9"
 
 networks:
-  todo_list_net:
-    name: todo_list_net
+  gateway:
+    name: todo-list-net
     driver: bridge
 
 services:
-  todo_list_api:
+  backend-dev:
+    profiles: [ "dev" ]
     build:
       context: ./server/
       target: development
-    image: todo_list_api
-    container_name: todo_list_api
+    image: todo-list-api:dev
+    container_name: tl-api-dev
+    tty: true
     ports:
       - "8080:8080"
-      - "5005:5005"   # Remote debug
-    environment:
-      - SERVER_PORT=8080
+      - "5005:5005" # Remote debug
     networks:
-      - todo_list_net
+      - gateway
+
+  backend-test:
+    profiles: [ "test" ]
+    build:
+      context: ./server/
+      target: test
+    image: todo-list-api:test
+    container_name: tl-api-test
+    tty: true
+    environment:
+      - SERVER_PORT=8081
+    ports:
+      - "8081:8081"
+    networks:
+      - gateway
