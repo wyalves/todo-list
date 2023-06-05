@@ -2,11 +2,9 @@ package dev.wyalves.todolist.dto;
 
 import dev.wyalves.todolist.models.Status;
 import dev.wyalves.todolist.models.Task;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
 
-public record TaskRequestDTO(String title, String description, Status status) {
-
-    public TaskRequestDTO(Task task) {
-        this(task.getTitle(), task.getDescription(), task.getStatus());
-    }
-
+@Schema(description = "Request for creating or updating a task.")
+public record TaskRequestDTO(@NotNull String title, @NotNull String description, @NotNull Status status) {
 }

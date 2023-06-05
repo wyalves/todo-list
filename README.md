@@ -13,7 +13,8 @@ A simple, containerized, Todo List API built with Java and Spring Boot.
 
 1. Run `docker-compose --profile dev up --build -d`
 2. To see the logs, run `docker logs -f tl-api-dev`
-3. The API will be available at `http://localhost:8080/api/tasks/`
+3. The API documentation can be found at `http://localhost:8080/api/docs`
+4. You can test the API using the Swagger UI at the documentation page.
 
 ## Running the tests
 
